@@ -1,0 +1,13 @@
+# Full model: global AdaGN32 + token-level cross-attention + FaceNet identity loss.
+base: base.yaml
+
+experiment:
+  name: full_model
+  output_dir: outputs/full_model
+
+models:
+  use_cross_attention: true
+
+training:
+  lambda_identity: 1.0
+  max_steps: 30000

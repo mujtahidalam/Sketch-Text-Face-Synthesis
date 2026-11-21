@@ -1,0 +1,56 @@
+# Global-conditioning model: sketch latent U-Net + CLIP -> mapping network -> AdaGN32.
+# No cross-attention, no identity loss. All other configs inherit from this file.
+
+experiment:
+  name: base
+  seed: 42
+  output_dir: outputs/base
+
+data:
+  root: data/mm_celeba_hq
+  manifest: data/mm_celeba_hq/manifest.csv
+  latents_dir: data/mm_celeba_hq/latents   # filled by mmface.precompute_latents
+  image_size: 256
+  horizontal_flip: 0.5
+  num_workers: 0
+  pin_memory: false
+
+models:
+  vae: stabilityai/sd-vae-ft-mse   # frozen, no fine-tuning
+  vae_checkpoint: null
+  clip: openai/clip-vit-base-patch32
+  base_channels: 64
+  max_channels: 512
+  style_dim: 512
+  mapping_layers: 3
+  levels: 4
+  noise_injection: true
+  use_skip_connections: true
+  use_adagn: true
+  use_mapping_network: true
+  use_cross_attention: false
+  cross_attention_levels: 2        # bottleneck + first two decoder stages (8x8, 16x16)
+  minibatch_std_group_size: 4
+
+training:
+  epochs: 400
+  max_steps: null
+  batch_size: 64
+  mixed_precision: true            # bf16 autocast
+  generator_lr: 1.0e-4
+  discriminator_lr: 4.0e-4
+  betas: [0.0, 0.99]
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  lambda_reconstruction: 50.0      # lambda_1
+  lambda_perceptual: 1.0           # lambda_2
+  lambda_identity: 0.0             # lambda_3
+  perceptual_batch_size: 4         # latents decoded per step for the pixel-space losses
+  r1_gamma: 1.0
+  r1_interval: 16
+  r1_batch_size: 16
+  ema_decay: 0.9999
+  save_every_epochs: 5
+
+evaluation:
+  batch_size: 16

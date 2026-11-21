@@ -1,0 +1,23 @@
+# Tiny run to check that the pipeline works end to end (1 step).
+base: base.yaml
+
+experiment:
+  name: smoke
+  output_dir: outputs/smoke
+
+data:
+  latents_dir: null
+
+models:
+  base_channels: 16
+  max_channels: 128
+
+training:
+  epochs: 1
+  max_steps: 1
+  batch_size: 2
+  perceptual_batch_size: 2
+  save_every_epochs: 1
+
+evaluation:
+  batch_size: 2

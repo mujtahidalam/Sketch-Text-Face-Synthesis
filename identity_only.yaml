@@ -1,0 +1,13 @@
+# Factorial cell: cross-attention off, identity loss on.
+base: base.yaml
+
+experiment:
+  name: identity_only
+  output_dir: outputs/identity_only
+
+models:
+  use_cross_attention: false
+
+training:
+  lambda_identity: 1.0
+  max_steps: 30000
