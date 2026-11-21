@@ -1,0 +1,15 @@
+# Ablation: plain U-Net, everything switched off.
+base: ../base.yaml
+
+experiment:
+  name: ablation_no_components
+  output_dir: outputs/ablations/no_components
+
+models:
+  use_adagn: false
+  use_skip_connections: false
+  use_mapping_network: false
+  noise_injection: false
+
+training:
+  max_steps: 5000

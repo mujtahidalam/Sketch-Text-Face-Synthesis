@@ -1,0 +1,12 @@
+# Ablation (5k steps, same budget for every variant).
+base: ../base.yaml
+
+experiment:
+  name: ablation_no_mapping
+  output_dir: outputs/ablations/no_mapping
+
+models:
+  use_mapping_network: false
+
+training:
+  max_steps: 5000

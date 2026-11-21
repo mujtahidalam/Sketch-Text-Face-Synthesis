@@ -1,0 +1,12 @@
+# Ablation (5k steps, same budget for every variant).
+base: ../base.yaml
+
+experiment:
+  name: ablation_no_adagn
+  output_dir: outputs/ablations/no_adagn
+
+models:
+  use_adagn: false
+
+training:
+  max_steps: 5000

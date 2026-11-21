@@ -1,0 +1,12 @@
+# Ablation (5k steps, same budget for every variant).
+base: ../base.yaml
+
+experiment:
+  name: ablation_no_noise
+  output_dir: outputs/ablations/no_noise
+
+models:
+  noise_injection: false
+
+training:
+  max_steps: 5000

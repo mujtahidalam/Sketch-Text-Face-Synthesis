@@ -1,0 +1,12 @@
+# Ablation (5k steps, same budget for every variant).
+base: ../base.yaml
+
+experiment:
+  name: ablation_no_skip
+  output_dir: outputs/ablations/no_skip
+
+models:
+  use_skip_connections: false
+
+training:
+  max_steps: 5000

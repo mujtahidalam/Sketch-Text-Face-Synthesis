@@ -1,0 +1,12 @@
+# Ablation (5k steps, same budget for every variant).
+base: ../base.yaml
+
+experiment:
+  name: ablation_plus_crossattn
+  output_dir: outputs/ablations/plus_crossattn
+
+models:
+  use_cross_attention: true
+
+training:
+  max_steps: 5000
