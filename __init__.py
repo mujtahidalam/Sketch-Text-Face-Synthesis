@@ -1,3 +1,9 @@
-"""Sketch + text conditioned face synthesis with a latent U-Net GAN."""
+from .discriminator import LatentDiscriminator, build_discriminator
+from .generator import MultimodalGenerator, build_generator
 
-__version__ = "1.0.0"
+__all__ = [
+    "LatentDiscriminator",
+    "MultimodalGenerator",
+    "build_discriminator",
+    "build_generator",
+]
